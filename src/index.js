@@ -1,17 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import { HashRouter as Router, Route } from 'react-router-dom';
+import ExplorePage from './pages/ExplorePage';
+import DashboardPage from './pages/DashboardPage';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
-
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+ReactDOM.render(<Router>
+    <App>
+      <Route key="index" exact path="/" component={DashboardPage} />
+      <Route key="explore" path="/explore" component={ExplorePage} />
+    </App>
+  </Router>, // eslint-disable-next-line no-undef
+document.getElementById('root'));
