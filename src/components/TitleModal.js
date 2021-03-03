@@ -29,10 +29,19 @@ const TitleModal = ({
     setAddingToDashboard(true);
 
     try {
+      // await (itemId ? updateDashboardItem : addDashboardItem)({
+      //       //   variables: {
+      //       //     id: itemId,
+      //       //     input: {
+      //       //       vizState: JSON.stringify(finalVizState),
+      //       //       name: finalTitle
+      //       //     }
+      //       //   }
+      //       // });
       await (itemId ? updateDashboardItem : addDashboardItem)({
         variables: {
-          id: itemId,
           input: {
+            id: itemId,
             vizState: JSON.stringify(finalVizState),
             name: finalTitle
           }

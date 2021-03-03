@@ -28,10 +28,19 @@ const Dashboard = ({
       });
 
       if (item && toUpdate !== item.layout) {
+        // updateDashboardItem({
+        //   variables: {
+        //     id: item.id,
+        //     input: {
+        //       layout: toUpdate
+        //     }
+        //   }
+        // });
+        // update the variables passed to `updateDashboardItem` function
         updateDashboardItem({
           variables: {
-            id: item.id,
             input: {
+              id: item.id,
               layout: toUpdate
             }
           }

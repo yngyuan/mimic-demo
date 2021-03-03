@@ -1,6 +1,5 @@
-import {React, useState}  from 'react';
-import { Spin, Button, Dropdown, Menu, Alert } from 'antd';
-import { DownOutlined } from '@ant-design/icons';
+import {React}  from 'react';
+import { Spin, Button, Alert } from 'antd';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@apollo/react-hooks';
 import { Icon } from '@ant-design/compatible';
@@ -87,24 +86,24 @@ const DashboardPage = () => {
     return <Alert message="Error occured while loading your query" description={error.toString()} type="error" />;
   }
   // filter by user ID
-  const menu = (
-      <Menu style={{fontSize: "40px"}}>
-        <Menu.Item key="0">
-          <a>
-            10006
-          </a>
-        </Menu.Item>
-        <Menu.Item key="1">
-          <a>
-            10011
-          </a>
-        </Menu.Item>
-        <Menu.Divider />
-        <Menu.Item key="3" disabled>
-          10013
-        </Menu.Item>
-      </Menu>
-  );
+  // const menu = (
+  //     <Menu style={{fontSize: "40px"}}>
+  //       <Menu.Item key="0">
+  //         <a>
+  //           10006
+  //         </a>
+  //       </Menu.Item>
+  //       <Menu.Item key="1">
+  //         <a>
+  //           10011
+  //         </a>
+  //       </Menu.Item>
+  //       <Menu.Divider />
+  //       <Menu.Item key="3" disabled>
+  //         10013
+  //       </Menu.Item>
+  //     </Menu>
+  // );
 
   const dashboardItem = item => <div key={item.id} data-grid={defaultLayout(item)}>
       <DashboardItem key={item.id} itemId={item.id} title={item.name}>
@@ -125,25 +124,33 @@ const DashboardPage = () => {
     </div>;
 
 
-  return !data || data.dashboardItems.length ? ([
-      //  Dropdown menu
-      <Dropdown overlay={menu} >
-          <a className="ant-dropdown-link" style={{fontSize:"18px",
-            marginTop: "40px",
-            marginLeft: "12px",
-            fontColor: "black",
-            padding: "3px",
-            backgroundColor: "white"}}
-             onClick={e => e.preventDefault()}>
-            Subject ID <DownOutlined />
-          </a>
-      </Dropdown>,
+  // return !data || data.dashboardItems.length ? (
+      // // [
+      // //  Dropdown menu
+      // <Dropdown overlay={menu} >
+      //     <a className="ant-dropdown-link" style={{fontSize:"18px",
+      //       marginTop: "40px",
+      //       marginLeft: "12px",
+      //       fontColor: "black",
+      //       padding: "3px",
+      //       backgroundColor: "white"}}
+      //        onClick={e => e.preventDefault()}>
+      //       Subject ID <DownOutlined />
+      //     </a>
+      // </Dropdown>,
 
       // dashboard items
-      <Dashboard dashboardItems={data && data.dashboardItems}>
-      {data && data.dashboardItems.map(deserializeItem).map(dashboardItem)}
-      </Dashboard> ])
-      : <Empty /> ;
+      // {/*<Dashboard dashboardItems={data && data.dashboardItems}>*/}
+      // {data && data.dashboardItems.map(deserializeItem).map(dashboardItem)}
+      // </Dashboard>
+      // ]
+      // )
+      // : <Empty /> ;
+    return !data || data.listDashboardItems.items.length ? (
+        <Dashboard dashboardItems={data && data.listDashboardItems.items}>
+            {data && data.listDashboardItems.items.map(deserializeItem).map(dashboardItem)}
+        </Dashboard>
+    ) : <Empty />;
 
 };
 
