@@ -1,4 +1,4 @@
-import React  from 'react';
+import {React, useState}  from 'react';
 import { Spin, Button, Dropdown, Menu, Alert } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
@@ -23,6 +23,7 @@ const defaultLayout = i => ({
   minW: 4,
   minH: 8
 });
+
 // Adding filter to dashboard
 // const dashboardItemsWithFilter = (dashboardItems, statusFilter) => {
 //   if (statusFilter === "all") {
@@ -49,6 +50,28 @@ const defaultLayout = i => ({
 //   ))
 // };
 
+// Adding drill down feature
+// const [drillDownQuery, setDrillDownQuery] = useState();
+// const handleBarClick = (event, yValues) => {
+//     if (event.xValues != null) {
+//         setDrillDownQuery(
+//             resultSet.drillDown(
+//                 {
+//                     xValues: event.xValues,
+//                     yValues
+//                 }
+//             )
+//         );
+//     }
+// };
+//
+// const drillDownResponse = useCubeQuery(
+//     drillDownQuery,
+//     {
+//         skip: !drillDownQuery
+//     }
+// );
+
 const DashboardPage = () => {
   const {
     loading,
@@ -63,7 +86,7 @@ const DashboardPage = () => {
   if (error) {
     return <Alert message="Error occured while loading your query" description={error.toString()} type="error" />;
   }
-
+  // filter by user ID
   const menu = (
       <Menu style={{fontSize: "40px"}}>
         <Menu.Item key="0">
@@ -103,7 +126,7 @@ const DashboardPage = () => {
 
 
   return !data || data.dashboardItems.length ? ([
-
+      //  Dropdown menu
       <Dropdown overlay={menu} >
           <a className="ant-dropdown-link" style={{fontSize:"18px",
             marginTop: "40px",
@@ -116,11 +139,11 @@ const DashboardPage = () => {
           </a>
       </Dropdown>,
 
+      // dashboard items
       <Dashboard dashboardItems={data && data.dashboardItems}>
       {data && data.dashboardItems.map(deserializeItem).map(dashboardItem)}
       </Dashboard> ])
       : <Empty /> ;
-
 
 };
 
